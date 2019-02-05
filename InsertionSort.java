@@ -21,19 +21,19 @@ public class InsertionSort {
 	}
 	
 	
-	public static Integer[] sort(Integer[] arr) {
-		for(int i = 1; i < arr.length; i++) {
-			if(arr[i] < arr[i-1]) {
-				insert(arr, i, findLocation(arr, i));
+	public static Integer[] sort(Integer[] array) {
+		for(int i = 1; i < array.length; i++) {
+			if(array[i] < array[i-1]) {
+				insert(array, i, findLocation(array, i));
 			}
 		}
-		return arr;
+		return array;
 	}
 	
 	//Function to find where the integer fits in the sorted array.
-	public static int findLocation(Integer[] arr, int index) {
+	public static int findLocation(Integer[] array, int index) {
 		int find = 1;
-		while(arr[index] < arr[index-find]) {
+		while(array[index] < array[index-find]) {
 			if(index-find == 0) {
 				return 0;
 			}
@@ -44,17 +44,17 @@ public class InsertionSort {
 	
 	
 	//Function to insert the integer into the correct location in the array.
-	public static Integer[] insert(Integer[] arr, int NumberToChange, int TargetLocation) {
-		int temp = arr[NumberToChange];
+	public static Integer[] insert(Integer[] array, int NumberToChange, int TargetLocation) {
+		int temp = array[NumberToChange];
 		while(NumberToChange >= TargetLocation) {
 			if(NumberToChange == TargetLocation) {
-				arr[NumberToChange] = temp;
+				array[NumberToChange] = temp;
 				break;
 			} else {
-				arr[NumberToChange] = arr[NumberToChange-1];
+				array[NumberToChange] = array[NumberToChange-1];
 				NumberToChange --;
 			}
 		}
-		return arr;
+		return array;
 	}
 }
