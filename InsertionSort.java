@@ -1,16 +1,22 @@
 import java.util.Arrays;
 
+/*An implementation in Java of the Insertion Sort, this is a sorting
+ * algorithm where the integers are transferred one at a time to 
+ * the right position. It does this by comparing it to the element directly
+ * to the left of it and then finding where in the 'sorted array' it will fit.
+ * The integer will then be inserted into the correct position. This is 
+ * done for all integers in the array.  */
+
 public class InsertionSort {
 	
 	public static void main(String[] args) {
 		//Unsorted array
 		Integer[] array = new Integer[] {4,3,1,10,12,6,9,8};
-		//System.out.println(Arrays.toString(array));
+		//[1,3,4,10,12,6,...]
 		
 		sort(array);
-		//System.out.println("SORT");
-
-		//System.out.println("[0, 1, 2,  3,  4, 5, 6, 7]");
+		
+		//Print sorted array
 		System.out.println(Arrays.toString(array));
 	}
 	
@@ -18,34 +24,36 @@ public class InsertionSort {
 	public static Integer[] sort(Integer[] arr) {
 		for(int i = 1; i < arr.length; i++) {
 			if(arr[i] < arr[i-1]) {
-				int slot = place(arr, i);
-				//insert(arr, i, slot);
+				insert(arr, i, findLocation(arr, i));
 			}
 		}
 		return arr;
 	}
 	
-	public static int place(Integer[] arr, int no) {
-		int find = 0;
-		while(arr[no-find] > arr[no]) {
+	//Function to find where the integer fits in the sorted array.
+	public static int findLocation(Integer[] arr, int index) {
+		int find = 1;
+		while(arr[index] < arr[index-find]) {
+			if(index-find == 0) {
+				return 0;
+			}
 			find ++;
 		}
-		System.out.println(no-find+1);
-		return no-find+1;
+		return index-find+1;
 	}
 	
-	//Function to insert the chosen number into the correct slot in the array, 
-	//by providing the array, the index the number to be changed and the index which
-	//the number is going to be placed into
-	public static Integer[] insert(Integer[] arr, int init, int slot) {
-		int temp = arr[init];
-		while(init < slot) {
-			System.out.println(init-1);
-			arr[init] = arr[init-1];
-			init --;
-		}
-		if(init == slot) {
-			arr[init] = temp;
+	
+	//Function to insert the integer into the correct location in the array.
+	public static Integer[] insert(Integer[] arr, int NumberToChange, int TargetLocation) {
+		int temp = arr[NumberToChange];
+		while(NumberToChange >= TargetLocation) {
+			if(NumberToChange == TargetLocation) {
+				arr[NumberToChange] = temp;
+				break;
+			} else {
+				arr[NumberToChange] = arr[NumberToChange-1];
+				NumberToChange --;
+			}
 		}
 		return arr;
 	}
